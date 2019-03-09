@@ -1,12 +1,7 @@
-package com.training.action;
-
-import com.training.Operation;
-import com.training.action.ActionType;
+package com.training;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Action {
 
@@ -38,15 +33,6 @@ public class Action {
         actionList.add((x, y) -> division(x, y));
         return actionList;
     }
-
-    /*public Map<ActionType, Operation<Integer>> getActionNumberMap() {
-        Map<ActionType, Operation<Integer>> actionMap = new HashMap<>();
-        actionMap.put(ActionType.SUM, (x, y) -> x + y);
-        actionMap.put(ActionType.SUBTRACTION, (x, y) -> x - y);
-        actionMap.put(ActionType.MULTIPLICATION, (x, y) -> x * y);
-        actionMap.put(ActionType.DIVISION, (x, y) -> x / y);
-        return actionMap;
-    }*/
 
     public List<Operation<String>> getActionTextList() {
         List<Operation<String>> actionList = new ArrayList<>();

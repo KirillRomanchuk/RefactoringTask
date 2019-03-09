@@ -1,6 +1,5 @@
 package com.training;
 
-import com.training.action.Action;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,14 +36,4 @@ public class ActionTest {
         int division = action.division(6, 4);
         Assert.assertEquals(1, division);
     }
-
-    /*@Test
-    public void getActionNumberList() {
-        List<Operation<Integer>> actionList = action.getActionNumberList();
-    }
-
-    @Test
-    public void getActionTextList() {
-        List<Operation<String>> actionListText = action.getActionTextList();
-    }*/
 }
