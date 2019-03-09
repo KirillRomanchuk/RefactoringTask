@@ -7,12 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Action<T> {
-    View view;
-
-    public Action(View view) {
-        this.view = view;
-    }
-
     public Map<ActionType, Operation<Integer>> getActionNumberList() {
         Map<ActionType, Operation<Integer>> actionList = new HashMap<>();
         actionList.put(ActionType.SUM, (x, y) -> x + y);
@@ -28,7 +22,7 @@ public class Action<T> {
         return actionMap;
     }
 
-    public void doAction(Map<ActionType, Operation<T>> actionMap, T firstValue, T secondValue) {
+    public void doAction(View view, Map<ActionType, Operation<T>> actionMap, T firstValue, T secondValue) {
         actionMap.values().stream().map(operation -> {
             try {
                 return operation.calculate(firstValue, secondValue);

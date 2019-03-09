@@ -5,8 +5,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ActionTest {
+    View view = new View();
+    Action action = new Action(view);
 
-//    Action action = new Action();
 /*
     @Test
     public void sum() {
