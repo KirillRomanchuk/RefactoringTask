@@ -23,12 +23,8 @@ public class Action<T> {
     }
 
     public void doAction(View view, Map<ActionType, Operation<T>> actionMap, T firstValue, T secondValue) {
-        actionMap.values().stream().map(operation -> {
-            try {
-                return operation.calculate(firstValue, secondValue);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }).forEach(s -> view.viewMessage(s));
+        actionMap.values().stream()
+                .map(operation -> operation.calculate(firstValue, secondValue).get())
+                .forEach(s -> view.viewMessage(s));
     }
 }
