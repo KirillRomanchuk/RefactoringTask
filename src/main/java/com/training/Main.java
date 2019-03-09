@@ -1,8 +1,12 @@
 package com.training;
 
+import com.training.action.Action;
+
 public class Main {
     public static void main(String[] args) {
-        new View<>(new Action().getActionNumberList(), 6, 4).viewMessage();
-        new View<>(new Action().getActionTextList(), "6", "4").viewMessage();
+        View view = new View();
+        Action action = new Action(view);
+        action.doAction(action.getActionNumberList(), 6, 4);
+        action.doAction(action.getActionTextList(), "6", "4");
     }
 }
