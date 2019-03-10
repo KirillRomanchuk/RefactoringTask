@@ -3,21 +3,28 @@ package com.training.action;
 import com.training.Operation;
 import com.training.View;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Action {
-    View view;
-    Map<ActionType, Operation<Integer>> actionNumberList;
-    Map<ActionType, Operation<String>> actionTextList;
+    private View view;
+    private Map<ActionType, Operation<Integer>> actionNumberMap;
+    private Map<ActionType, Operation<String>> actionTextMap;
 
     public Action(View view) {
         this.view = view;
-        this.actionNumberList = getActionNumberList();
-        this.actionTextList = getActionTextList();
+        this.actionNumberMap = initActionNumberMap();
+        this.actionTextMap = initActionTextMap();
     }
 
-    private Map<ActionType, Operation<Integer>> getActionNumberList() {
+    public Map<ActionType, Operation<Integer>> getActionNumberMap() {
+        return actionNumberMap;
+    }
+
+    public Map<ActionType, Operation<String>> getActionTextMap() {
+        return actionTextMap;
+    }
+
+    private Map<ActionType, Operation<Integer>> initActionNumberMap() {
         Map<ActionType, Operation<Integer>> actionMap = new HashMap<>();
         actionMap.put(ActionType.SUM, (x, y) -> x + y);
         actionMap.put(ActionType.SUBTRACTION, (x, y) -> x - y);
@@ -26,26 +33,23 @@ public class Action {
         return actionMap;
     }
 
-    private Map<ActionType, Operation<String>> getActionTextList() {
+    private Map<ActionType, Operation<String>> initActionTextMap() {
         Map<ActionType, Operation<String>> actionMap = new HashMap<>();
         actionMap.put(ActionType.SUM, (x, y) -> x + y);
         return actionMap;
     }
 
     public void doAction(ActionType actionType, Integer firstValue, Integer secondValue) {
-        doAction(actionType, getActionNumberList(), firstValue, secondValue);
+        view.viewMessage(doAction(actionType, actionNumberMap, firstValue, secondValue));
     }
 
     public void doAction(ActionType actionType, String firstValue, String secondValue) {
-        doAction(actionType, getActionTextList(), firstValue, secondValue);
+        view.viewMessage(doAction(actionType, actionTextMap, firstValue, secondValue));
     }
 
-    private <T> void doAction(ActionType actionType, Map<ActionType, Operation<T>> actionMap, T firstValue, T secondValue) {
-        actionMap.values().stream()
+    public <T> T doAction(ActionType actionType, Map<ActionType, Operation<T>> actionMap, T firstValue, T secondValue) {
+        return actionMap.values().stream()
                 .filter(action -> action.equals(actionMap.get(actionType)))
-                .map(operation -> operation.calculate(firstValue, secondValue).get())
-                .forEach(s -> view.viewMessage(s));
+                .map(operation -> operation.calculate(firstValue, secondValue)).findFirst().get().get();
     }
-
-
 }
